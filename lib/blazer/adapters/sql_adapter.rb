@@ -11,7 +11,21 @@ module Blazer
             def self.name
               "Blazer::Connection::Adapter#{object_id}"
             end
-            establish_connection(data_source.settings["url"]) if data_source.settings["url"]
+
+            def self.connect(settings)
+              if settings["url"]
+                establish_connection(settings["url"])
+              else
+                establish_connection(
+                  adapter: settings["adapter"],
+                  host: settings["host"],
+                  username: settings["username"],
+                  password: settings["password"],
+                  database: settings["database"],
+                )
+              end
+            end
+            connect(data_source.settings)
           end
       end
 
@@ -78,7 +92,8 @@ module Blazer
       end
 
       def reconnect
-        connection_model.establish_connection(settings["url"])
+        connection_model.connect(settings)
+        # connection_model.establish_connection(settings["url"])
       end
 
       def cost(statement)

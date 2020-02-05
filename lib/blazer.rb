@@ -224,4 +224,5 @@ Blazer.register_adapter "presto", Blazer::Adapters::PrestoAdapter
 Blazer.register_adapter "mongodb", Blazer::Adapters::MongodbAdapter
 Blazer.register_adapter "salesforce", Blazer::Adapters::SalesforceAdapter
 Blazer.register_adapter "sql", Blazer::Adapters::SqlAdapter
+Blazer.register_adapter "postgresql", Blazer::Adapters::SqlAdapter
 Blazer.register_adapter "snowflake", Blazer::Adapters::SnowflakeAdapter
